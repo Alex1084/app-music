@@ -1,0 +1,5 @@
+<form (ngSubmit)="onSubmit(formSearch)" #formSearch="ngForm">
+    <input type="search" name="word" id="" placeholder="search" ngModel required>
+
+    <button class="primary-btn" [disabled]="formSearch.invalid">search</button>
+</form>
