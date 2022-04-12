@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-
+import { Subject } from 'rxjs';
 import { Album, List } from './album';
 import { ALBUMS, ALBUM_LISTS } from './mock-albums';
 
@@ -10,6 +10,7 @@ export class AlbumService {
 
   private albums: Album[] = ALBUMS;
   private lists: List[] = ALBUM_LISTS;
+  sendCurrentNumberPage = new Subject<number>();
 
   constructor() { }
 
@@ -33,5 +34,9 @@ export class AlbumService {
 
   search(word: string) {
     return this.albums.filter(album => album.title.includes(word));
+  }
+
+  currentPage(page: number) {
+    return this.sendCurrentNumberPage.next(page);
   }
 }

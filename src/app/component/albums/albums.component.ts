@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { from } from 'rxjs';
 
 import { Album } from '../../album';
-import {AlbumService} from '../../album.service'
+import { AlbumService } from '../../album.service'
 
 @Component({
   selector: 'app-albums',
@@ -16,10 +16,10 @@ export class AlbumsComponent implements OnInit {
   selectedAlbum!: Album;
   status: string = "";
   albumSearch !: Album;
-  constructor(private albumService: AlbumService ) { }
+  constructor(private albumService: AlbumService) { }
 
   ngOnInit(): void {
-    this.albums = this.albumService.getAlbums();
+    this.albums = this.albumService.paginate(0, 5);
   }
 
   onSelect(album: Album) {
@@ -27,11 +27,14 @@ export class AlbumsComponent implements OnInit {
     this.selectedAlbum = album;
   }
 
-  playParent($event : any) {
+  playParent($event: any) {
     this.status = $event.id;
   }
 
-  search($event : any){
+  search($event: any) {
     if ($event) this.albums = $event;
+  }
+  paginate(album: { start: number; end: number; }) {
+    this.albums = this.albumService.paginate(album.start, album.end);
   }
 }

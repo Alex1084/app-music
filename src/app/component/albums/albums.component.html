@@ -1,7 +1,4 @@
-<header>
-    <app-search (searchAlbums)="search($event)"></app-search>
-</header>
-
+<app-search (searchAlbums)="search($event)"></app-search>
 <div class="row content">
     <div class="col-sm-4 video">
         <app-album-details [album]="selectedAlbum" (onPlay)="playParent($event)"></app-album-details>
@@ -11,7 +8,7 @@
         <div class="card" *ngFor="let album of albums">
             <div class="card-header">{{album.ref}}</div>
             <div class="card-body">
-                <h5 class="card-title">{{ album.title }}</h5>
+                <h5 class="card-title"><a class="text-info" routerLink="/album/{{album.id}}">{{album.title}}</a></h5>
                 <span *ngIf="status == album.id">[play]</span>
                 <p class="card-text">{{ album.description }}</p>
                 <ul class="list-inline" *ngIf="album.tags">
@@ -33,3 +30,4 @@
         </div>
     </div>
 </div>
+<app-paginate (setPaginate)="paginate($event)"></app-paginate>
